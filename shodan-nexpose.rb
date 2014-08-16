@@ -1,6 +1,7 @@
 require 'nexpose'
 require 'yaml'
 require_relative 'shodan_api'
+require_relative 'nexpose_edit'
 
 #Loading conf variables from YAML file
 begin
@@ -11,16 +12,20 @@ begin
   instace_port = config["nexpose_port"]
   username = config["nexpose_user"]
   password = config["nexpose_pass"]
-  nexpose_site = config[""]
+  nexpose_site = config["nexpose_site"]
 rescue ArgumentError => e
   puts "Could not parse conf YAML: #{e.message}"
 end
 
-new_ips = call_shodan(shodan_api_key,shodan_search)
+new_ip = call_shodan(shodan_api_key,shodan_search)
 
-puts new_ips
-if new_ips.any?
-  puts 'new ips to load into Nexpose'
+if new_ip.any?
+  begin
+    puts "New ip has been found, going to update Nexpose"
+    nexpose_edit_site(instance_name,username,password,nexpose_site,new_ip)
+  rescue ArgumentError => e
+    puts "Could not update Nexpose: #{e.message}"
+  end
 else
-  puts 'same shit'
+  puts "No changes found"
 end
