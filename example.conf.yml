@@ -5,3 +5,4 @@ nexpose_host: nexpose.domain.tld
 nexpose_port: 3780
 nexpose_user: nxadmin
 nexpose_pass: nxadmin
+nexpose_site: pubic_webservers
