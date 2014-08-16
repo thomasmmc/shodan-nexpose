@@ -9,11 +9,11 @@ require 'yaml'
 ```
 
 ## Config file
-``` yaml
+---
 shodan_api_key: 123456789
 shodan_search: org:"Rapid7 LLC"
 nexpose_host: nexpose.domain.tld
 nexpose_port: 3780
 nexpose_user: nxadmin
 nexpose_pass: nxadmin
-```
+---
