@@ -13,8 +13,8 @@ You will need to have a Shodan account, and for this to work optimally, you shou
 [Nexpose](https://www.rapid7.com/products/nexpose/) is a vulnerability management platform written and sold by Rapid7.
 Nexpose has the ability to run distributed scan engines to assess your systems from multiple points.  These scan engines can be hosted by an organization, or can be subscribed to from Rapid7.
 
-In this case, we are updating an Nexpose site which is associated with an external scan engine so that we are scanning all external resources and not missing anything.
-[Nexpose API site](https://community.rapid7.com/community/nexpose/nexpose-apis)
+In this case, we are updating an Nexpose site which is associated with an external scan engine so that we are scanning all external resources and not missing anything.  You will need to get the site_id of the site you wish to edit.
+For more information on the nexpose API [Nexpose API site](https://community.rapid7.com/community/nexpose/nexpose-apis)
 
 # Usage
 
@@ -26,12 +26,18 @@ require 'yaml'
 ```
 
 ## Config file
+* **shodan_api_key** This is your api key from Shodan
+* **shodan_search** This is the search that you would like to perform on shodan
+* **nexpose_host** This is the FQDN or IP of your Nexpose instance (port is assumed 3780)
+* **nexpose_user** This is a Nexpose user account that has the ability to read/write the needed sites
+* **nexpose_pass** Pretty self explanatory
+* **nexpose_site** This is the Nexpose siteid for the scan site you want to update
+
 ```yaml
 shodan_api_key: 123456789
 shodan_search: org:"Rapid7 LLC"
 nexpose_host: nexpose.domain.tld
-nexpose_port: 3780
 nexpose_user: nxadmin
 nexpose_pass: nxadmin
-nexpose_site: pubic_webservers
+nexpose_site: 1
 ```
