@@ -39,6 +39,7 @@ def call_shodan(shodan_api_key,shodan_search)
   diff_ip = Array.new
   resip.each do |ip|
     if ip_collection.include?(ip)
+    else
       diff_ip << ip
     end
   end
