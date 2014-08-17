@@ -30,12 +30,27 @@ def call_shodan(shodan_api_key,shodan_search)
       result['matches'].each do |host|
          resip.push(host['ip_str'])
         end
+      #check to see if the result count is > 100, we will need to do paging
+        pages = (result['total']/100.0).ceil
+        if pages > 1 then
+          page = 2
+          while pages >= page do
+            result = api.search(shodan_search, :page => page)
+            result['matches'].each do |host|
+               resip.push(host['ip_str'])
+              end
+            page = page+1
+          end
+        else
+        end
+
     rescue Exception => e
         return "Shodan API Error: #{e.to_s}"
     end
   end
 
   #writing a collection for use in the next running of this
+puts resip.uniq.count
   results_file = resip.uniq.to_yaml
   File.open("shodan_collection.yml", 'w') {|f| f.write results_file }
 
