@@ -5,11 +5,12 @@ def call_shodan(shodan_api_key,shodan_search)
   #Loading colletion from previous run
   begin
   ip_collection = Array.new
-  if File.file?('shodan_collection.yml')
+  if File.file?("shodan_collection.yml")
     then
       ip_collection = YAML.load_file('shodan_collection.yml')
     else
-      File.new "shodan_collection.yml"
+      f = File.new("shodan_collection.yml", "w")
+      f.close
     end
   rescue ArgumentError => e
     return "Could not parse collection YAML: #{e.message}"
