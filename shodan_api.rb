@@ -35,7 +35,7 @@ def call_shodan(shodan_api_key,shodan_search)
   end
 
   #writing a collection for use in the next running of this
-  results_file = resip.to_yaml
+  results_file = resip.uniq.to_yaml
   File.open("shodan_collection.yml", 'w') {|f| f.write results_file }
 
   #comparing the arrays and determaning which to return
